@@ -4,9 +4,15 @@ import Layout from './components/Layout/Layout';
 import Products from './components/Shop/Products';
 
 
-function App() {
 
-  const showCart = useSelector((state) => state.ui.cartIsVisible);
+
+function App() {
+  const showCartHook = (state) => {
+    console.log('state',state);
+
+  return  state.ui.cartIsVisible
+  };
+  const showCart = useSelector(showCartHook);
 
   return (
     <Layout>
