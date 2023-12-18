@@ -7,6 +7,8 @@ const cartSlice = createSlice({
         totalQuantity: 0,
         // totalAmount: 0 
     },
+    // ! we don`t add the async operation inside the reducers, because reducers are pure functions and async operation free.
+    // ! we can add the async operation inside the components(eg: useEffect) or inside the action creators
     reducers:{
         addItemToCart(state, action){
 
