@@ -6,6 +6,7 @@ const cartSlice = createSlice({
     initialState: {
         items: [],
         totalQuantity: 0,
+        changed: false
         // totalAmount: 0 
     },
     // ! we don`t add the async operation inside the reducers, because reducers are pure functions and async operation free.
@@ -13,8 +14,8 @@ const cartSlice = createSlice({
     reducers:{
 
         replaceCart(state, action){
-            state.totalQuantity = action.payload.totalQuantity;
             state.items = action.payload.items;
+            state.totalQuantity = action.payload.totalQuantity;
         },
 
         addItemToCart(state, action){
@@ -22,6 +23,7 @@ const cartSlice = createSlice({
             const newItem = action.payload;
             const existingItem = state.items.find(item => item.id === newItem.id);
             state.totalQuantity ++;
+            state.changed = true;
             if(!existingItem) {
                 
                 state.items.push({
@@ -41,6 +43,7 @@ const cartSlice = createSlice({
             const ItemId = action.payload;
             const existingItem = state.items.find(item => item.id === ItemId);
             state.totalQuantity--;
+            state.changed = true;
             if(existingItem.quantity === 1) {
                 state.items = state.items.filter(item => item.id !== ItemId);
             }
